@@ -1,0 +1,25 @@
+# --- CONFIGURACIÓN DE CLIMALERT ---
+spring:
+  application:
+    name: climalert
+
+  # --- CONFIGURACIÓN DE JAKARTA MAIL ---
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${MAIL_USERNAME:mail_username}
+    password: ${MAIL_PASSWORD:mail_password}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          ssl:
+            trust: smtp.gmail.com
+
+# --- CONFIGURACIÓN DE LA API DEL CLIMA ---
+weatherapi:
+  url: http://api.weatherapi.com/v1/current.json
+  location: Buenos Aires
+  key: ${WEATHER_API_KEY:weather_api_key}
