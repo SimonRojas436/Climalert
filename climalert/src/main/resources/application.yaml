@@ -23,3 +23,7 @@ weatherapi:
   url: http://api.weatherapi.com/v1/current.json
   location: Buenos Aires
   key: ${WEATHER_API_KEY:weather_api_key}
+
+climalert:
+  alertas:
+    destinatarios: rojassimon436@gmail.com,tuamigo@gmail.com,tujefe@gmail.com

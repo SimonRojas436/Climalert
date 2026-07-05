@@ -5,6 +5,8 @@ import ar.edu.utn.frba.ddsi.climalert.adapters.ProveedorClimaAdapter;
 import ar.edu.utn.frba.ddsi.climalert.models.entities.RegistroClimatico;
 import ar.edu.utn.frba.ddsi.climalert.repositories.RegistrosClimaticosRepository;
 import ar.edu.utn.frba.ddsi.climalert.services.RegistrosClimaticosService;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,6 +14,8 @@ public class RegistrosClimaticosServiceImpl implements RegistrosClimaticosServic
   private RegistrosClimaticosRepository registrosClimaticosRepository;
   private ProveedorClimaAdapter proveedorClimaAdapter;
   private NotificadorEmailAdapter notificadorEmailAdapter;
+  @Value("${climalert.alertas.destinatarios}")
+  private List<String> correosInteresados;
 
   public RegistrosClimaticosServiceImpl(
       RegistrosClimaticosRepository registrosClimaticosRepository,
@@ -51,7 +55,7 @@ public class RegistrosClimaticosServiceImpl implements RegistrosClimaticosServic
           ultimoRegistroClimatico.getTemperaturaC(),
           ultimoRegistroClimatico.getHumedad());
 
-      notificadorEmailAdapter.enviarEmail("rojassimon436@gmail.com", asunto, cuerpo); // para probar
+      correosInteresados.forEach(c -> notificadorEmailAdapter.enviarEmail(c, asunto, cuerpo));
     }
   }
 }
